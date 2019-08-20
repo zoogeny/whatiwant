@@ -1,0 +1,25 @@
+.summary {
+    &__title {
+        margin: 0;
+    }
+
+    &__total {
+        display: inline-block;
+        width: 150px;
+    }
+
+    &__categories-item {
+        height: 25px;
+    }
+
+    &__categories-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    &__categories-item-title {
+        display: inline-block;
+        width: 150px;
+        margin: 0;
+    }
+}

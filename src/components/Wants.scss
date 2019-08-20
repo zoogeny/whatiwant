@@ -1,0 +1,49 @@
+.wantList {
+    margin-right: 50px;
+
+    &__title {
+        margin: 0;
+    }
+
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__item {
+        height: 25px;
+    }
+
+    &__thing {
+        display: inline-block;
+        width: 200px;
+    }
+
+    &__category {
+        display: inline-block;
+        width: 100px;
+    }
+
+    &__cost {
+        display: inline-block;
+        width: 100px;
+        text-align: right;
+    }
+
+    &__remove {
+        margin-left: 10px;
+    }
+
+    &__add-thing {
+        width: 194px;
+    }
+
+    &__add-category {
+        width: 94px;
+    }
+
+    &__add-cost {
+        width: 94px;
+    }
+}
