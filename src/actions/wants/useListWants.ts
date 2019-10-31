@@ -1,9 +1,13 @@
 import { useState, useCallback } from "react";
 
+import { Want, ErrorHandler } from "../../types";
+
 const API_URL = process.env.REACT_APP_API_URL;
 
-const useListWants = (errorHandler = () => {}) => {
-    const [ wantList, setWantList ] = useState([]);
+const useListWants = (
+    errorHandler: ErrorHandler = () => {},
+) => {
+    const [ wantList, setWantList ] = useState<Want[]>([]);
 
     // NOTE: useCallback allows the reuse of logic for loading the document
     // list both in the useEffect case as well as within an action
@@ -11,12 +15,12 @@ const useListWants = (errorHandler = () => {}) => {
         // NOTE: we have to wrap the async call since useEffect has specific
         // requirements on return types and promises are not valid return types
         const wrappedCall = async () => {
-            const url = new URL(`${ API_URL }/want/list`);
+            const url = new Request(`${ API_URL }/want/list`);
 
             let response;
             try {
                 response = await fetch(url);
-            } catch(error) {
+            } catch (error) {
                 errorHandler("Unable to connect to server");
                 return;
             }
@@ -29,13 +33,13 @@ const useListWants = (errorHandler = () => {}) => {
             let responseJson;
             try {
                 responseJson = await response.json();
-            } catch(error) {
+            } catch (error) {
                 errorHandler("Unable to parse want list");
                 return;
             }
 
             setWantList(responseJson.wants);
-        }
+        };
 
         wrappedCall();
     }, [ errorHandler ]);

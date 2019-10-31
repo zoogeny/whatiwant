@@ -1,5 +1,5 @@
 
-export const formatCurrency = (amount) => {
+export const formatCurrency = (amount: number) => {
     const negativeSign = amount < 0 ? "-" : "";
     const amountAsString = Math.abs(amount).toString();
     const prefixLength = (amountAsString.length > 3) ? amountAsString.length % 3 : 0;

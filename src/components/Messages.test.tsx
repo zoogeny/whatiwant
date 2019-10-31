@@ -1,15 +1,15 @@
 import React from "react";
 import { expect } from "chai";
-import { assert, stub } from "sinon";
-import { shallow } from "enzyme";
-import Message from "./Message";
+import { assert, stub, SinonSpy } from "sinon";
+import { shallow, ShallowWrapper } from "enzyme";
+import Messages from "./Messages";
 
 describe("Message", () => {
-    let wrapper;
-    let handleClearMessageStub;
+    let wrapper: ShallowWrapper;
+    let handleClearMessageStub: SinonSpy;
 
     it("renders without crashing", () => {
-        shallow(<Message />);
+        shallow(<Messages messages={[]} handleClearMessage={stub()} />);
     });
 
     describe("when provided with a single message", () => {
@@ -17,7 +17,7 @@ describe("Message", () => {
             const messages = mockMessages(1, "message");
             handleClearMessageStub = stub();
 
-            wrapper = shallow(<Message messages={ messages } handleClearMessage={ handleClearMessageStub } />);
+            wrapper = shallow(<Messages messages={ messages } handleClearMessage={ handleClearMessageStub } />);
         });
 
         it("renders a single message item", () => {
@@ -45,7 +45,9 @@ describe("Message", () => {
             const errors = mockMessages(1, "error");
             handleClearMessageStub = stub();
 
-            wrapper = shallow(<Message messages={ messages.concat(errors) } handleClearMessage={ handleClearMessageStub } />);
+            wrapper = shallow(<Messages
+                messages={ messages.concat(errors) }
+                handleClearMessage={ handleClearMessageStub } />);
         });
 
         it("renders multiple message items", () => {
@@ -60,13 +62,13 @@ describe("Message", () => {
     });
 });
 
-const mockMessages = (count, type) => {
+const mockMessages = (count: number, type: string) => {
     const messages = [];
     for (let i = 0; i < count; i++) {
         messages.push({
             type,
             content: `Test ${ type } ${ i }`,
-            messageId: i
+            messageId: i,
         });
     }
     return messages;

@@ -1,19 +1,31 @@
 import React from "react";
+
+import { Want } from "../types";
 import { formatCurrency } from "../utils/formatter";
+
 import "./Summary.scss";
 
-const Category = ({ title, cost }) => {
-    return (            
+type CategoryProps = {
+    title: string;
+    cost: number;
+};
+
+const Category: React.SFC<CategoryProps> = ({ title, cost }) => {
+    return (
         <li className="summary__categories-item">
             <h4 className="summary__categories-item-title">{ title }</h4>
             <span>${ formatCurrency(cost) }</span>
         </li>
     );
-}
+};
 
-const Summary = ({ wants }) => {
+type SummaryProps = {
+    wants: Want[];
+};
+
+const Summary: React.SFC<SummaryProps> = ({ wants }) => {
     let total = 0;
-    const categories = {};
+    const categories: Record<string, number> = {};
     wants.forEach(want => {
         total += want.cost;
         if (!(want.category in categories)) {
@@ -33,8 +45,8 @@ const Summary = ({ wants }) => {
             <div>
                 <h3 className="summary__categories-title">Categories</h3>
                 <ul className="summary__categories-list">
-                { 
-                    Object.keys(categories).map(category => 
+                {
+                    Object.keys(categories).map(category =>
                         <Category key={ category } title={ category } cost={ categories[category] } />)
                 }
                 </ul>

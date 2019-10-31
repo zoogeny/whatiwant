@@ -12,9 +12,8 @@ const deleteWant = async (req, res) => {
         return;
     }
 
-    let id;
     try {
-        id = await removeWant(requestId);
+        await removeWant(requestId);
     } catch(error) {
         serverError(res, `Unable to delete want from data store: ${ error }`);
         return;

@@ -1,9 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import { Want } from "../types";
 import { formatCurrency } from "../utils/formatter";
 import "./Wants.scss";
 
-const Want = ({ want, initiateDelete }) => {
+type WantProps = {
+    want: Want;
+    initiateDelete: (id: string) => void;
+};
+
+const WantItem: React.SFC<WantProps> = ({ want, initiateDelete }) => {
     const handleClickRemove = () => {
         initiateDelete(want.id);
     };
@@ -17,13 +23,19 @@ const Want = ({ want, initiateDelete }) => {
     );
 };
 
-const Wants = ({ wants, initiateAdd, initiateDelete }) => {
+type WantsProps = {
+    wants: Want[];
+    initiateAdd: (thing: string, category: string, cost: number) => void;
+    initiateDelete: (id: string) => void;
+};
+
+const Wants: React.SFC<WantsProps> = ({ wants, initiateAdd, initiateDelete }) => {
     const handleAddClick = () => {
-        const thingElement = document.getElementById("wantThing");
-        const categoryElement = document.getElementById("wantCategory");
-        const costElement = document.getElementById("wantCost");
-        
-        initiateAdd(thingElement.value, categoryElement.value, costElement.value);
+        const thingElement = document.getElementById("wantThing") as HTMLInputElement;
+        const categoryElement = document.getElementById("wantCategory") as HTMLInputElement;
+        const costElement = document.getElementById("wantCost") as HTMLInputElement;
+
+        initiateAdd(thingElement.value, categoryElement.value, parseFloat(costElement.value));
 
         thingElement.value = "";
         categoryElement.value = "";
@@ -32,7 +44,7 @@ const Wants = ({ wants, initiateAdd, initiateDelete }) => {
     return (<div className="wantList">
         <h2 className="wantList__title">Things I want</h2>
         <ul className="wantList__list">
-            { wants.map(want => <Want want={ want } key={ want.id } initiateDelete={ initiateDelete } />) }
+            { wants.map(want => <WantItem want={ want } key={ want.id } initiateDelete={ initiateDelete } />) }
         </ul>
         <div className="wantList__add">
             <input id="wantThing" className="wantList__add-thing" type="text"></input>
@@ -41,17 +53,6 @@ const Wants = ({ wants, initiateAdd, initiateDelete }) => {
             <button className="wantList__add-button" onClick={ handleAddClick }>Add</button>
         </div>
     </div>);
-};
-
-Wants.propTypes = {
-    wants: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
-        thing: PropTypes.string,
-        category: PropTypes.string,
-        cost: PropTypes.number
-    })),
-    initiateAdd: PropTypes.func,
-    initiateDelete: PropTypes.func
 };
 
 export default Wants;

@@ -1,36 +1,36 @@
 import { useState } from "react";
 
+import { Message } from "../types";
+
 let messageId = 0;
 
 const useMessages = () => {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState<Message[]>([]);
 
-    const addMessage = (content) => {
+    const addMessage = (content: string) => {
         const newMessages = messages.slice();
         newMessages.push({
             type: "message",
             content,
-            messageId: messageId++
+            messageId: messageId++,
         });
         setMessages(newMessages);
-    }
+    };
 
-    const addError = (content) => {
+    const addError = (content: string) => {
         const newMessages = messages.slice();
         newMessages.push({
             type: "error",
             content,
-            messageId: messageId++
+            messageId: messageId++,
         });
         setMessages(newMessages);
-    }
+    };
 
-    const clearMessage = (id) => {
-        const newMessages = messages.slice();
-        const index = messages.find(item => item.messageId === id);
-        newMessages.splice(index, 1);
+    const clearMessage = (id: number) => {
+        const newMessages = messages.filter(message => message.messageId !== id);
         setMessages(newMessages);
-    }
+    };
 
     return { messages, addMessage, addError, clearMessage };
 };

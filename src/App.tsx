@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.scss";
 
 import Message from "./components/Messages";
 import Wants from "./components/Wants";
@@ -7,6 +6,8 @@ import Summary from "./components/Summary";
 
 import useWants from "./actions/wants/useWants";
 import useMessages from "./actions/useMessages";
+
+import "./App.scss";
 
 function App() {
     const { messages, addError, addMessage, clearMessage } = useMessages();
