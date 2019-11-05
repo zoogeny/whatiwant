@@ -1,7 +1,7 @@
-const sqlite3 = require('sqlite3');
-const db = new sqlite3.Database('./server/data/wants.sqlite3');
+import sqlite3 from "sqlite3";
+const db = new sqlite3.Database("./server/data/wants.sqlite3");
 
-const getAllWants = () => {
+export const getAllWants = () => {
     return new Promise((resolve, reject) => {
         db.all(`SELECT id, thing, category, cost FROM  wants;`, (err, rows) => {
             if (err) {
@@ -9,34 +9,34 @@ const getAllWants = () => {
             } else {
                 resolve(rows);
             }
-        })
+        });
     });
 };
 
-const getWantById = (id) => {
+export const getWantById = (id: string) => {
     return new Promise((resolve, reject) => {
         db.all(`SELECT id, thing, category, cost FROM  wants WHERE id=$id;`, {
-            "$id": id
+            $id: id,
         }, (err, rows) => {
             if (err) {
                 reject(err);
             } else {
                 resolve(rows[0]);
             }
-        })
+        });
     });
 };
 
-const addWant = (thing, category, cost) => {
+export const addWant = (thing: string, category: string, cost: number) => {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.run(`
                 INSERT INTO wants (thing, category, cost)
                     VALUES ($thing, $category, $cost);`,
                 {
-                    "$thing": thing,
-                    "$category": category,
-                    "$cost": cost
+                    $thing: thing,
+                    $category: category,
+                    $cost: cost,
                 }, err => {
                     if (err) {
                         reject(err);
@@ -55,10 +55,10 @@ const addWant = (thing, category, cost) => {
     });
 };
 
-const removeWant = (id) => {
+export const removeWant = (id: string) => {
     return new Promise((resolve, reject) => {
         db.run(`DELETE FROM wants WHERE id=$id;`, {
-            "$id": id
+            $id: id,
         }, err => {
             if (err) {
                 reject(err);
@@ -67,11 +67,4 @@ const removeWant = (id) => {
             }
         });
     });
-};
-
-module.exports = {
-    getWantById,
-    getAllWants,
-    addWant,
-    removeWant
 };

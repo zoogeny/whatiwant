@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "allowJs": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "declaration": false,
+        "resolveJsonModule": true,
+        "target": "es5",
+    }
+}

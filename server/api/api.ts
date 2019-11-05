@@ -1,9 +1,9 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 
-const addWant = require("./addWant");
-const deleteWant = require("./deleteWant");
-const getAllWants = require("./getAllWants");
+import addWant from "./addWant";
+import deleteWant from "./deleteWant";
+import getAllWants from "./getAllWants";
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.get("/want/list", getAllWants);
 router.post("/want/add", addWant);
 router.delete("/want/delete/:id", deleteWant);
 
-module.exports = router;
+export default router;

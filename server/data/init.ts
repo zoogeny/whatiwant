@@ -1,5 +1,5 @@
-const sqlite3 = require('sqlite3');
-const db = new sqlite3.Database('./server/data/wants.sqlite3');
+import sqlite3 from "sqlite3";
+const db = new sqlite3.Database("./server/data/wants.sqlite3");
 
 db.serialize(() => {
     db.run("DROP TABLE IF EXISTS wants;", err => {
