@@ -39,6 +39,7 @@
     "start:react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:cov": "CI=true react-scripts test --coverage",
     "lint": "npx tslint -p .",
     "eject": "react-scripts eject"
   },

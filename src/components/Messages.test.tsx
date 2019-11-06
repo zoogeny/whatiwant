@@ -1,11 +1,11 @@
 import React from "react";
 import { expect } from "chai";
 import { assert, stub, SinonSpy } from "sinon";
-import { shallow, ShallowWrapper } from "enzyme";
+import { mount, shallow, ReactWrapper } from "enzyme";
 import Messages from "./Messages";
 
 describe("Message", () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
     let handleClearMessageStub: SinonSpy;
 
     it("renders without crashing", () => {
@@ -17,7 +17,7 @@ describe("Message", () => {
             const messages = mockMessages(1, "message");
             handleClearMessageStub = stub();
 
-            wrapper = shallow(<Messages messages={ messages } handleClearMessage={ handleClearMessageStub } />);
+            wrapper = mount(<Messages messages={ messages } handleClearMessage={ handleClearMessageStub } />);
         });
 
         it("renders a single message item", () => {
@@ -45,7 +45,7 @@ describe("Message", () => {
             const errors = mockMessages(1, "error");
             handleClearMessageStub = stub();
 
-            wrapper = shallow(<Messages
+            wrapper = mount(<Messages
                 messages={ messages.concat(errors) }
                 handleClearMessage={ handleClearMessageStub } />);
         });
@@ -62,13 +62,14 @@ describe("Message", () => {
     });
 });
 
+let messageId = 0;
 const mockMessages = (count: number, type: string) => {
     const messages = [];
     for (let i = 0; i < count; i++) {
         messages.push({
             type,
             content: `Test ${ type } ${ i }`,
-            messageId: i,
+            messageId: messageId++,
         });
     }
     return messages;
