@@ -5,8 +5,8 @@ const API_URL = process.env.REACT_APP_API_URL;
 type AddSuccessHandler = (addedWant: Want) => void;
 
 const useAddWant = (
-    handleAddSuccess: AddSuccessHandler = () => {},
-    errorHandler: ErrorHandler = () => {},
+    handleAddSuccess: AddSuccessHandler,
+    errorHandler: ErrorHandler,
 ) => {
     const initiateAdd = async (thing: string, category: string, cost: number) => {
         const url = new Request(`${ API_URL }/want/add/`);

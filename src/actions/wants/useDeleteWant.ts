@@ -5,8 +5,8 @@ const API_URL = process.env.REACT_APP_API_URL;
 type DeleteSuccessHandler = (want: Want) => void;
 
 const useDeleteWant = (
-    handleDeleteSuccess: DeleteSuccessHandler = () => {},
-    errorHandler: ErrorHandler = () => {},
+    handleDeleteSuccess: DeleteSuccessHandler,
+    errorHandler: ErrorHandler,
 ) => {
     const initiateDelete = async (id: string) => {
         const url = new Request(`${ API_URL }/want/delete/${ id }`);

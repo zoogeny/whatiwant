@@ -5,7 +5,7 @@ import { Want, ErrorHandler } from "../../types";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const useListWants = (
-    errorHandler: ErrorHandler = () => {},
+    errorHandler: ErrorHandler,
 ) => {
     const [ wantList, setWantList ] = useState<Want[]>([]);
 
