@@ -8,6 +8,7 @@ const getAll: RequestHandler = async (req, res) => {
     try {
         wants = await getAllWants();
     } catch (err) {
+        console.error(err);
         serverError(res, `Unable to load wants: ${ err.description }`);
         return;
     }

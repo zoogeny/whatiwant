@@ -1,5 +1,4 @@
-import sqlite3 from "sqlite3";
-const db = new sqlite3.Database("./server/data/wants.sqlite3");
+import { db } from "./db";
 
 export const getAllWants = () => {
     return new Promise((resolve, reject) => {

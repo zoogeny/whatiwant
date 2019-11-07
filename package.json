@@ -37,9 +37,10 @@
     "start": "ts-node --project server/tsconfig.json server/index.ts",
     "start:dev": "ts-node-dev --project server/tsconfig.json --watch server server/index.ts",
     "start:react": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:cov": "CI=true react-scripts test --coverage",
+    "build:dev": "tsc --project server/tsconfig.json",
+    "build:react": "react-scripts build",
+    "test": "CI=true react-scripts test --coverage",
+    "test:watch": "react-scripts test",
     "lint": "npx tslint -p .",
     "eject": "react-scripts eject"
   },
