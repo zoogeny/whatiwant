@@ -1,6 +1,13 @@
 import express from "express";
 import path from "path";
+
+import logger, { configureLogger, LogLevel } from "./logging/logger";
 import api from "./api/api";
+
+const localLogger = logger.localLogger("server/index");
+if (process.env.NODE_ENV === "production") {
+  configureLogger({ level: LogLevel.WARN });
+}
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -17,5 +24,5 @@ app.get("/", (req, res) => {
 app.use("/api", api);
 
 app.listen(PORT, () => {
-  console.log(`Check out the app at http://localhost:${PORT}`);
+  localLogger.info(`Check out the app at http://localhost:${PORT}`);
 });

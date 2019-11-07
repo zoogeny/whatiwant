@@ -1,9 +1,12 @@
 import { db } from "./db";
+import logger from "../logging/logger";
+
+const localLogger = logger.localLogger("server/addWant");
 
 db.serialize(() => {
     db.run("DROP TABLE IF EXISTS wants;", err => {
         if (err) {
-            console.error(err);
+            localLogger.error("Unable to drop table", err);
         }
     });
 
@@ -16,9 +19,9 @@ db.serialize(() => {
         );
         `, err => {
             if (err) {
-                console.error(err);
+                localLogger.error("Error creating table", err);
             } else {
-                console.log("Database initialization success");
+                localLogger.info("Database initialization success");
             }
         });
 });

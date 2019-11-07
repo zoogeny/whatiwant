@@ -2,6 +2,9 @@ import { RequestHandler } from "express";
 
 import { getWantById, removeWant } from "../data/want";
 import { serverError } from "./helpers";
+import logger from "../logging/logger";
+
+const localLogger = logger.localLogger("server/deleteWant");
 
 const deleteWant: RequestHandler = async (req, res) => {
     const requestId = req.params.id;
@@ -10,6 +13,7 @@ const deleteWant: RequestHandler = async (req, res) => {
     try {
         want = await getWantById(requestId);
     } catch (error) {
+        localLogger.error("Unable to find want", error, { requestId });
         serverError(res, `Unable to find want with id ${ requestId }: ${ error }`);
         return;
     }
@@ -17,6 +21,7 @@ const deleteWant: RequestHandler = async (req, res) => {
     try {
         await removeWant(requestId);
     } catch (error) {
+        localLogger.error("Unable to delete want", error, { requestId });
         serverError(res, `Unable to delete want from data store: ${ error }`);
         return;
     }
