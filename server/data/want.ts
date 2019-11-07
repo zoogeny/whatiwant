@@ -13,7 +13,7 @@ export const getAllWants = () => {
     });
 };
 
-export const getWantById = (id: string) => {
+export const getWantById = (id: string): Promise<object> => {
     return new Promise((resolve, reject) => {
         db.all(`SELECT id, thing, category, cost FROM  wants WHERE id=$id;`, {
             $id: id,
@@ -21,7 +21,7 @@ export const getWantById = (id: string) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(rows[0]);
+                resolve(rows[0] as object);
             }
         });
     });

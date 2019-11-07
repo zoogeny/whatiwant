@@ -6,7 +6,7 @@ import { serverError } from "./helpers";
 const deleteWant: RequestHandler = async (req, res) => {
     const requestId = req.params.id;
 
-    let want;
+    let want: object;
     try {
         want = await getWantById(requestId);
     } catch (error) {
@@ -27,4 +27,4 @@ const deleteWant: RequestHandler = async (req, res) => {
     });
 };
 
-export default deleteWant; 
+export default deleteWant;
