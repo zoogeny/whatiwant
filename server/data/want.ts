@@ -2,7 +2,7 @@ import { db } from "./db";
 
 export const getAllWants = () => {
     return new Promise((resolve, reject) => {
-        db.all(`SELECT id, thing, category, cost FROM  wants;`, (err, rows) => {
+        db.all("SELECT id, thing, category, cost FROM  wants;", (err, rows) => {
             if (err) {
                 reject(err);
             } else {
@@ -14,7 +14,7 @@ export const getAllWants = () => {
 
 export const getWantById = (id: string): Promise<object> => {
     return new Promise((resolve, reject) => {
-        db.all(`SELECT id, thing, category, cost FROM  wants WHERE id=$id;`, {
+        db.all("SELECT id, thing, category, cost FROM  wants WHERE id=$id;", {
             $id: id,
         }, (err, rows) => {
             if (err) {
@@ -32,15 +32,15 @@ export const addWant = (thing: string, category: string, cost: number) => {
             db.run(`
                 INSERT INTO wants (thing, category, cost)
                     VALUES ($thing, $category, $cost);`,
-                {
-                    $thing: thing,
-                    $category: category,
-                    $cost: cost,
-                }, err => {
-                    if (err) {
-                        reject(err);
-                    }
-                });
+            {
+                $thing: thing,
+                $category: category,
+                $cost: cost,
+            }, err => {
+                if (err) {
+                    reject(err);
+                }
+            });
 
             db.all("SELECT last_insert_rowid()", {}, (err, rows) => {
                 if (err) {
@@ -56,7 +56,7 @@ export const addWant = (thing: string, category: string, cost: number) => {
 
 export const removeWant = (id: string) => {
     return new Promise((resolve, reject) => {
-        db.run(`DELETE FROM wants WHERE id=$id;`, {
+        db.run("DELETE FROM wants WHERE id=$id;", {
             $id: id,
         }, err => {
             if (err) {

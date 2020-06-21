@@ -45,10 +45,10 @@ const Summary: React.SFC<SummaryProps> = ({ wants }) => {
             <div>
                 <h3 className="summary__categories-title">Categories</h3>
                 <ul className="summary__categories-list">
-                {
-                    Object.keys(categories).map(category =>
-                        <Category key={ category } title={ category } cost={ categories[category] } />)
-                }
+                    {
+                        Object.keys(categories).map(category =>
+                            <Category key={ category } title={ category } cost={ categories[category] } />)
+                    }
                 </ul>
             </div>
         </div>

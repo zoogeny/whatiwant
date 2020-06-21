@@ -18,10 +18,10 @@ db.serialize(() => {
             cost INTEGER NOT NULL
         );
         `, err => {
-            if (err) {
-                localLogger.error("Error creating table", err);
-            } else {
-                localLogger.info("Database initialization success");
-            }
-        });
+        if (err) {
+            localLogger.error("Error creating table", err);
+        } else {
+            localLogger.info("Database initialization success");
+        }
+    });
 });

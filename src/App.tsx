@@ -9,7 +9,7 @@ import useMessages from "./actions/useMessages";
 
 import "./App.scss";
 
-function App() {
+const App: React.FC = () => {
     const { messages, addError, addMessage, clearMessage } = useMessages();
     const { wantList, initiateAdd, initiateDelete } = useWants(addMessage, addError);
 
@@ -24,7 +24,7 @@ function App() {
                 <Summary wants={ wantList } />
             </div>
         </div>
-  );
+    );
 }
 
 export default App;

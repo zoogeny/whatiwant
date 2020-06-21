@@ -9,7 +9,7 @@ type WantProps = {
     initiateDelete: (id: string) => void;
 };
 
-const WantItem: React.SFC<WantProps> = ({ want, initiateDelete }) => {
+const WantItem: React.FC<WantProps> = ({ want, initiateDelete }) => {
     const handleClickRemove = () => {
         initiateDelete(want.id);
     };
@@ -29,7 +29,7 @@ type WantsProps = {
     initiateDelete: (id: string) => void;
 };
 
-const Wants: React.SFC<WantsProps> = ({ wants, initiateAdd, initiateDelete }) => {
+const Wants: React.FC<WantsProps> = ({ wants, initiateAdd, initiateDelete }) => {
     const handleAddClick = () => {
         const thingElement = document.getElementById("wantThing") as HTMLInputElement;
         const categoryElement = document.getElementById("wantCategory") as HTMLInputElement;
