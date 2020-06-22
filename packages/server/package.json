@@ -1,0 +1,33 @@
+{
+  "name": "@wiw/server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "ts-node ./data/init.ts",
+    "build": "tsc",
+    "start": "ts-node ./index.ts",
+    "start:dev": "ts-node-dev --watch . ./index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sqlite3": "^4.1.0",
+    "typescript": "^3.9.5",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.6",
+    "@types/sqlite3": "^3.1.5",
+    "@types/winston": "^2.4.4",
+    "@wiw/types": "1.0.0",
+    "nodemon": "^2.0.4",
+    "tslib": "2.0.0",
+    "ts-node": "^8.4.1",
+    "ts-node-dev": "^1.0.0-pre.44"
+  }
+}
